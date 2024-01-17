@@ -1,4 +1,4 @@
-Chain Force
+**Chain Force**
 
 Game concepts and design (WIP)
 
