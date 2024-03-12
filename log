@@ -1,3 +1,4 @@
+2024 Mar 11 - continued testing of latest update of web3 plugin. Now working fully on the Chain Force demo
 2024 Mar 9 - web3 plugin is now building and linking on godot 4.2. The extra JSON implementation was unnecessary and has been removed from ./thirdparty/ https://github.com/harmony-one/godot-web3-plugin/pull/2
 2024 Mar 8 - Still working on codebase for web3 plugin godot 4.2 compatibility https://github.com/harmony-one/godot-web3-plugin/pull/1
 Fixes an error with RPCRequest::request returns JSON::print(ddata))  JSON implementation was altered on newest release and no longer support JSON::print
