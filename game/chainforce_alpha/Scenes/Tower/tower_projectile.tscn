@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bshgq3m3yqxs8"]
+
+[ext_resource type="PackedScene" uid="uid://crpppa3jd761u" path="res://Scenes/ShipProjectile/ship_projectile.tscn" id="1_bmw7w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_655qw"]
+radius = 30.0
+
+[sub_resource type="Curve" id="Curve_135yd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0iuo8"]
+curve = SubResource("Curve_135yd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bs8qr"]
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 70.0
+initial_velocity_max = 140.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_0iuo8")
+
+[node name="TowerProjectile" instance=ExtResource("1_bmw7w")]
+modulate = Color(0, 0.5, 2, 1)
+speed = 1400.0
+damage = 4
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_655qw")
+
+[node name="ProjectileTrail" parent="." index="1"]
+width = 50.0
+max_length = 12
+
+[node name="Sprite2D" parent="." index="2"]
+scale = Vector2(1, 1)
+
+[node name="ExplosionParticles" parent="." index="3"]
+process_material = SubResource("ParticleProcessMaterial_bs8qr")

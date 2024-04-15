@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5md3lc67yau2"]
+
+[ext_resource type="Script" path="res://Scenes/GUI/gui.gd" id="1_p5gj5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l436y"]
+bg_color = Color(0, 0.35, 0.0291666, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.45, 0.0375, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qsemr"]
+bg_color = Color(0, 0.85, 0.0708333, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.6, 0.05, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_p5gj5")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerHPBar" type="ProgressBar" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 385.0
+offset_bottom = 52.0
+theme_override_styles/background = SubResource("StyleBoxFlat_l436y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qsemr")
+value = 100.0

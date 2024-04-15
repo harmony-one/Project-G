@@ -1,0 +1,96 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvi7dft6wrew"]
+
+[ext_resource type="Script" path="res://Scenes/Enemy/enemy_ship.gd" id="1_pvjtv"]
+[ext_resource type="Texture2D" uid="uid://iwfl2rgeo7u7" path="res://Scenes/Minion/ship_D.png" id="2_kfg0x"]
+[ext_resource type="Texture2D" uid="uid://c3ucu6nuqrjco" path="res://Particles/circle.png" id="3_f7hl5"]
+[ext_resource type="Script" path="res://Scenes/Enemy/enemy_projectile_shooter.gd" id="4_ddss5"]
+[ext_resource type="PackedScene" uid="uid://75nxhnxaanx8" path="res://Scenes/Minion/minion_projectile.tscn" id="5_jvcln"]
+[ext_resource type="AudioStream" uid="uid://dgqygq2psqrf4" path="res://SFX/LaserPew.wav" id="6_ab710"]
+[ext_resource type="AudioStream" uid="uid://r601hvuhtm56" path="res://SFX/explosion.mp3" id="7_ub7ea"]
+
+[sub_resource type="Curve" id="Curve_beteo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_25v7c"]
+curve = SubResource("Curve_beteo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1s422"]
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 140.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.15
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_25v7c")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b4kp6"]
+radius = 700.0
+
+[node name="Minion" type="CharacterBody2D" groups=["minion"]]
+collision_layer = 4
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_pvjtv")
+hp = 15
+speed = 200.0
+rotation_speed = 3.0
+shoot_distance = 600.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1.5, 0.2, 0, 1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_kfg0x")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Sprite2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -24, 36, 12, 24, 24, 0, 12, -24, 24, -36, 12)
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+self_modulate = Color(2, 0.2, 0, 1)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_1s422")
+texture = ExtResource("3_f7hl5")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_b4kp6")
+
+[node name="ProjectileShooter" type="Node2D" parent="."]
+position = Vector2(0, -14)
+script = ExtResource("4_ddss5")
+projectile_scene = ExtResource("5_jvcln")
+pitch_scale_min = 1.2
+pitch_scale_max = 1.4
+
+[node name="Timer" type="Timer" parent="ProjectileShooter"]
+autostart = true
+
+[node name="ShootSFX" type="AudioStreamPlayer2D" parent="ProjectileShooter"]
+position = Vector2(0, 32)
+stream = ExtResource("6_ab710")
+volume_db = -15.0
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="ExplosionSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ub7ea")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 50.0
+max_speed = 250.0
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="timeout" from="ProjectileShooter/Timer" to="ProjectileShooter" method="_on_timer_timeout"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

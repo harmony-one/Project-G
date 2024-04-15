@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b04so78u7jfp6"]
+
+[ext_resource type="PackedScene" uid="uid://cdrpldaf107rx" path="res://Scenes/Tower/tower.tscn" id="1_4e6l5"]
+[ext_resource type="PackedScene" uid="uid://dgbwditesecia" path="res://Scenes/Minion/friendly_minion.tscn" id="2_80jkx"]
+
+[node name="FriendlyTower" groups=["friendly"] instance=ExtResource("1_4e6l5")]
+collision_layer = 2
+collision_mask = 4
+minion_scene = ExtResource("2_80jkx")
+
+[node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(0, 0.4, 1.6, 1)
+
+[node name="ExplosionParticles" parent="." index="3"]
+self_modulate = Color(0, 0.4, 1.6, 1)
+
+[node name="DetectionArea" parent="." index="4"]
+collision_layer = 2
+collision_mask = 4

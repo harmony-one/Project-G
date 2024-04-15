@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgbwditesecia"]
+
+[ext_resource type="PackedScene" uid="uid://cvi7dft6wrew" path="res://Scenes/Minion/minion.tscn" id="1_1urxp"]
+
+[node name="FriendlyMinion" groups=["friendly"] instance=ExtResource("1_1urxp")]
+collision_layer = 2
+collision_mask = 5
+
+[node name="Sprite2D" parent="." index="0"]
+modulate = Color(0, 0.4, 1.6, 1)
+
+[node name="ExplosionParticles" parent="." index="2"]
+self_modulate = Color(0, 0.4, 1.6, 1)
+
+[node name="DetectionArea" parent="." index="3"]
+collision_layer = 2
+collision_mask = 4

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctn2quncvypv5"]
+
+[ext_resource type="PackedScene" uid="uid://cdrpldaf107rx" path="res://Scenes/Tower/tower.tscn" id="1_5unhk"]
+[ext_resource type="PackedScene" uid="uid://xxwgiaw3w4hf" path="res://Scenes/Minion/enemy_minion.tscn" id="2_7je71"]
+
+[node name="EnemyTower" groups=["enemy"] instance=ExtResource("1_5unhk")]
+collision_layer = 4
+collision_mask = 2
+minion_scene = ExtResource("2_7je71")
+
+[node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(1.6, 0.16, 0, 1)
+
+[node name="ExplosionParticles" parent="." index="3"]
+self_modulate = Color(2, 0.2, 0, 1)
