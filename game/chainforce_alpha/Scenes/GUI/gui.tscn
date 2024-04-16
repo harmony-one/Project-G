@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5md3lc67yau2"]
+[gd_scene load_steps=10 format=3 uid="uid://b5md3lc67yau2"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/gui.gd" id="1_p5gj5"]
+[ext_resource type="Script" path="res://Scenes/GUI/minimap.gd" id="2_cey2b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l436y"]
 bg_color = Color(0, 0.35, 0.0291666, 1)
@@ -26,6 +27,29 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkuaw"]
+bg_color = Color(0.121569, 0.72549, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71plc"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 4
+border_width_right = 4
+border_color = Color(0.121569, 0.72549, 0, 1)
+corner_radius_top_right = 15
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_beef5"]
+size = Vector2(400, 50)
+
+[sub_resource type="Gradient" id="Gradient_2ivi6"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lhd64"]
+gradient = SubResource("Gradient_2ivi6")
+width = 400
+
 [node name="GUI" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_p5gj5")
@@ -48,3 +72,743 @@ offset_bottom = 52.0
 theme_override_styles/background = SubResource("StyleBoxFlat_l436y")
 theme_override_styles/fill = SubResource("StyleBoxFlat_qsemr")
 value = 100.0
+
+[node name="RespawnTimerPanel" type="Panel" parent="Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -275.0
+offset_top = -60.0
+offset_right = 275.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rkuaw")
+
+[node name="RespawnTimerLabel" type="RichTextLabel" parent="Control/RespawnTimerPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -33.5
+offset_bottom = 33.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]Respawning in XX:XX"
+fit_content = true
+
+[node name="Minimap" type="Panel" parent="Control"]
+self_modulate = Color(1, 1, 1, 0.92)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -198.0
+offset_right = 418.0
+offset_bottom = 202.0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_71plc")
+script = ExtResource("2_cey2b")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/Minimap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="MapSubviewport" type="SubViewport" parent="Control/Minimap/SubViewportContainer"]
+unique_name_in_owner = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(420, 400)
+render_target_update_mode = 4
+
+[node name="Whole Map" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport"]
+scale = Vector2(1.5, 1.5)
+
+[node name="Bottom Map" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map"]
+z_index = 5
+
+[node name="Home Base" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map"]
+
+[node name="Wall" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Home Base"]
+position = Vector2(0, 665)
+scale = Vector2(4, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Home Base/Wall"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Home Base/Wall"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall2" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Home Base"]
+position = Vector2(1078, 158)
+rotation = -1.0472
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Home Base/Wall2"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Home Base/Wall2"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall3" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Home Base"]
+position = Vector2(-1079, 158)
+rotation = 1.0472
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Home Base/Wall3"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Home Base/Wall3"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Left Lane" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map"]
+position = Vector2(-801, 0)
+
+[node name="Wall" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane"]
+position = Vector2(-1756, -349)
+scale = Vector2(6, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall2" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane"]
+position = Vector2(-3363, -766)
+rotation = 0.785398
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall2"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall2"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall4" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane"]
+position = Vector2(-2113, -1670)
+rotation = 0.785398
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall4"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall4"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall6" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane"]
+position = Vector2(-2531, -2877)
+rotation = 1.5708
+scale = Vector2(4, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall6"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall6"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall5" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane"]
+position = Vector2(-1106, -1253)
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall5"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall5"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall3" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane"]
+position = Vector2(-3780, -2573)
+rotation = 1.5708
+scale = Vector2(7, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall3"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Left Lane/Wall3"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Right Lane" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map"]
+position = Vector2(801, 0)
+scale = Vector2(-1, 1)
+
+[node name="Wall" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane"]
+position = Vector2(-1756, -349)
+scale = Vector2(6, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall2" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane"]
+position = Vector2(-3363, -766)
+rotation = 0.785398
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall2"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall2"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall4" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane"]
+position = Vector2(-2113, -1670)
+rotation = 0.785398
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall4"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall4"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall6" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane"]
+position = Vector2(-2531, -2877)
+rotation = 1.5708
+scale = Vector2(4, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall6"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall6"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall5" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane"]
+position = Vector2(-1106, -1253)
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall5"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall5"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall3" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane"]
+position = Vector2(-3780, -2573)
+rotation = 1.5708
+scale = Vector2(7, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall3"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Right Lane/Wall3"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Top Lane" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map"]
+
+[node name="Wall" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane"]
+position = Vector2(-909, -1253)
+scale = Vector2(2, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall3" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane"]
+position = Vector2(-772, -1785)
+rotation = 1.13446
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall3"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall3"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall4" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane"]
+position = Vector2(772, -1785)
+rotation = 2.00713
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall4"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall4"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall5" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane"]
+position = Vector2(1402, -2315)
+scale = Vector2(2, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall5"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall5"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall6" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane"]
+position = Vector2(-1402, -2315)
+scale = Vector2(2, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall6"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall6"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall7" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane"]
+position = Vector2(-1777, -3129)
+rotation = 1.5708
+scale = Vector2(4, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall7"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall7"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall8" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane"]
+position = Vector2(1777, -3129)
+rotation = 1.5708
+scale = Vector2(4, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall8"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall8"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall2" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane"]
+position = Vector2(909, -1253)
+scale = Vector2(2, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall2"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Bottom Map/Top Lane/Wall2"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Top Map" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map"]
+z_index = 5
+position = Vector2(0, -7312)
+rotation = 3.14159
+
+[node name="Home Base" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map"]
+
+[node name="Wall" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Home Base"]
+position = Vector2(0, 665)
+scale = Vector2(4, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Home Base/Wall"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Home Base/Wall"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall2" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Home Base"]
+position = Vector2(1078, 158)
+rotation = -1.0472
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Home Base/Wall2"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Home Base/Wall2"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall3" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Home Base"]
+position = Vector2(-1079, 158)
+rotation = 1.0472
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Home Base/Wall3"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Home Base/Wall3"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Left Lane" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map"]
+position = Vector2(-801, 0)
+
+[node name="Wall" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane"]
+position = Vector2(-1756, -349)
+scale = Vector2(6, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall2" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane"]
+position = Vector2(-3363, -766)
+rotation = 0.785398
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall2"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall2"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall4" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane"]
+position = Vector2(-2113, -1670)
+rotation = 0.785398
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall4"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall4"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall6" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane"]
+position = Vector2(-2531, -2877)
+rotation = 1.5708
+scale = Vector2(4, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall6"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall6"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall5" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane"]
+position = Vector2(-1106, -1253)
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall5"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall5"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall3" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane"]
+position = Vector2(-3780, -2573)
+rotation = 1.5708
+scale = Vector2(7, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall3"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Left Lane/Wall3"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Right Lane" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map"]
+position = Vector2(801, 0)
+scale = Vector2(-1, 1)
+
+[node name="Wall" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane"]
+position = Vector2(-1756, -349)
+scale = Vector2(6, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall2" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane"]
+position = Vector2(-3363, -766)
+rotation = 0.785398
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall2"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall2"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall4" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane"]
+position = Vector2(-2113, -1670)
+rotation = 0.785398
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall4"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall4"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall6" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane"]
+position = Vector2(-2531, -2877)
+rotation = 1.5708
+scale = Vector2(4, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall6"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall6"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall5" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane"]
+position = Vector2(-1106, -1253)
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall5"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall5"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall3" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane"]
+position = Vector2(-3780, -2573)
+rotation = 1.5708
+scale = Vector2(7, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall3"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Right Lane/Wall3"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Top Lane" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map"]
+
+[node name="Wall" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane"]
+position = Vector2(-909, -1253)
+scale = Vector2(2, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall3" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane"]
+position = Vector2(-772, -1785)
+rotation = 1.13446
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall3"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall3"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall4" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane"]
+position = Vector2(772, -1785)
+rotation = 2.00713
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall4"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall4"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall5" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane"]
+position = Vector2(1402, -2315)
+scale = Vector2(2, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall5"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall5"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall6" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane"]
+position = Vector2(-1402, -2315)
+scale = Vector2(2, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall6"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall6"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall7" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane"]
+position = Vector2(-1777, -3129)
+rotation = 1.5708
+scale = Vector2(4, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall7"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall7"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall8" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane"]
+position = Vector2(1777, -3129)
+rotation = 1.5708
+scale = Vector2(4, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall8"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall8"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall2" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane"]
+position = Vector2(909, -1253)
+scale = Vector2(2, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall2"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Top Map/Top Lane/Wall2"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Middle Map" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map"]
+position = Vector2(-30, -40)
+
+[node name="Wall" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map"]
+position = Vector2(444, -4166)
+rotation = 0.785398
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map/Wall"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map/Wall"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall2" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map"]
+position = Vector2(450, -3162)
+rotation = -0.959931
+scale = Vector2(3.7, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map/Wall2"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map/Wall2"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Middle Map2" type="Node2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map"]
+position = Vector2(30, -40)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Wall" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map2"]
+position = Vector2(444, -4166)
+rotation = 0.785398
+scale = Vector2(3, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map2/Wall"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map2/Wall"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Wall2" type="StaticBody2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map2"]
+position = Vector2(450, -3162)
+rotation = -0.959931
+scale = Vector2(3.7, 1)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map2/Wall2"]
+shape = SubResource("RectangleShape2D_beef5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport/Whole Map/Middle Map2/Wall2"]
+scale = Vector2(1, 50)
+texture = SubResource("GradientTexture1D_lhd64")
+
+[node name="Camera2D" type="Camera2D" parent="Control/Minimap/SubViewportContainer/MapSubviewport"]
+position = Vector2(100, -5600)
+zoom = Vector2(0.028, 0.028)

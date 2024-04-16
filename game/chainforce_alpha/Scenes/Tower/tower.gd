@@ -33,6 +33,7 @@ func _physics_process(delta: float) -> void:
 
 func shoot_enemy(delta: float):
 	if enemy_target == null or enemy_target.hp <= 0:
+		choose_next_target()
 		return
 	
 	var target_rotation: float = global_position.angle_to_point(enemy_target.global_position) #+ PI/2

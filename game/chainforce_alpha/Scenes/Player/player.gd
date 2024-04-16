@@ -5,7 +5,11 @@ signal hp_changed(new_hp: float)
 
 @export var hp: int = 20 :
 	set(val):
-		hp = val
+		if is_shielded: # Block some damage if shield's on
+			hp -= (hp - val) / 2
+		else:
+			hp = val
+		
 		hp_changed.emit(hp)
 		if is_inside_tree():
 			var tween: Tween = create_tween()
@@ -23,6 +27,15 @@ signal hp_changed(new_hp: float)
 @onready var explosion_particles: GPUParticles2D = $Particles/ExplosionParticles
 
 var is_dead: bool
+var is_shielded: bool
+var max_hp: int
+var starting_speed: float
+var starting_max_speed: float
+
+func _ready() -> void:
+	max_hp = hp
+	starting_speed = speed
+	starting_max_speed = max_speed
 
 func _process(delta: float) -> void:
 	if is_dead:
@@ -99,3 +112,53 @@ func die():
 	left_strafe_particles.emitting = false
 	right_strafe_particles.emitting = false
 	$ExplosionSFX.play()
+	
+	disable_all_powerups()
+	
+	$RespawnTimer.start()
+
+func _on_respawn_timer_timeout() -> void:
+	is_dead = false
+	hp = max_hp
+	$ProjectileShooter.process_mode = Node.PROCESS_MODE_INHERIT
+	$Sprite2D.visible = true
+	$CollisionPolygon2D.set_deferred("disabled", false)
+	
+	global_position = Vector2.ZERO
+	velocity = Vector2.ZERO
+
+func collect_powerup(powerup_name: String):
+	print("Collecting %s" % powerup_name)
+	if powerup_name == "speed":
+		var tween: Tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(self, "speed", starting_speed + 200, 1)
+		tween.tween_property(self, "max_speed", starting_max_speed + 250, 1)
+		acceleration_particles.amount = 150
+		%SpeedPowerupTimer.start()
+	elif powerup_name == "shield":
+		is_shielded = true
+		var tween: Tween = create_tween()
+		tween.tween_property($PlayerShield, "self_modulate:a", 1, 0.5).from(0.0)
+		%ShieldPowerupTimer.start()
+	elif powerup_name == "power":
+		$ProjectileShooter.bonus_damage += 1
+
+func disable_all_powerups():
+	_on_speed_powerup_timer_timeout()
+	_on_shield_powerup_timer_timeout()
+	$ProjectileShooter.bonus_damage = 0
+
+func _on_speed_powerup_timer_timeout() -> void:
+	var tween: Tween = create_tween()
+	tween.set_parallel(true)
+	
+	tween.tween_property(self, "speed", starting_speed, 1)
+	tween.tween_property(self, "max_speed", starting_max_speed, 1)
+	acceleration_particles.amount = 50
+
+
+func _on_shield_powerup_timer_timeout() -> void:
+	is_shielded = false
+	var tween: Tween = create_tween()
+	tween.tween_property($PlayerShield, "self_modulate:a", 0, 0.5)

@@ -21,10 +21,21 @@ class_name EnemyShip
 @onready var projectile_shooter: EnemyProjectileShooter = $ProjectileShooter
 @onready var detection_area: Area2D = $DetectionArea
 
+var powerup_scene: PackedScene = preload("res://Scenes/Powerup/powerup.tscn")
+
 var enemy_target: Node2D
 var is_dead: bool
 
+var target_base: Base
+
 func _ready() -> void:
+	# Set target base
+	for base: Base in get_tree().get_nodes_in_group("base"):
+		var target_enemy: bool = base.is_in_group("enemy") and is_in_group("friendly")
+		var target_friendly: bool = base.is_in_group("friendly") and is_in_group("enemy")
+		if target_enemy or target_friendly:
+			target_base = base
+	
 	# Spawn animation
 	var start_scale: Vector2 = $Sprite2D.scale
 	
@@ -73,12 +84,23 @@ func die():
 	$CollisionPolygon2D.set_deferred("disabled", true)
 	$ProjectileShooter.process_mode = Node.PROCESS_MODE_DISABLED
 	$ExplosionSFX.play()
+	
+	var spawn_powerup: bool = is_in_group("enemy") and randi_range(0, 10) == 10
+	if spawn_powerup:
+		var powerup: Node2D = powerup_scene.instantiate()
+		powerup.global_position = global_position
+		#add_sibling(powerup)
+		call_deferred("add_sibling", powerup)
+	
 	await get_tree().create_timer(2).timeout
 	queue_free()
 
 func choose_next_target():
-	await get_tree().process_frame
-	await get_tree().process_frame
+	if !detection_area.has_overlapping_bodies():
+		enemy_target = target_base
+		projectile_shooter.can_shoot = false
+		return
+	
 	var next_target: Node2D
 	for body: Node2D in detection_area.get_overlapping_bodies():
 		if next_target == null or next_target.hp <= 0:
@@ -89,16 +111,7 @@ func choose_next_target():
 			if distance_to_body < distance_to_target:
 				next_target = body
 	
-	if next_target == null:
-		# If no target found, go to enemy base
-		for base: Base in get_tree().get_nodes_in_group("base"):
-			var target_enemy: bool = base.is_in_group("enemy") and is_in_group("friendly")
-			var target_friendly: bool = base.is_in_group("friendly") and is_in_group("enemy")
-			if target_enemy or target_friendly:
-				enemy_target = base
-		projectile_shooter.can_shoot = false
-	else:
-		enemy_target = next_target
+	enemy_target = next_target
 
 # NOTE: Not used at the moment, might be useful later.
 #func target_closest_tower():

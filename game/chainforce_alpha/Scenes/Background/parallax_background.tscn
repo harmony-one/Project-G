@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://djqk7tqcy47fr"]
+
+[ext_resource type="Texture2D" uid="uid://cwjtfio5v7s50" path="res://Scenes/Background/SpaceBackGround_0.webp" id="1_fpees"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+motion_scale = Vector2(0.15, 0.15)
+motion_mirroring = Vector2(3840, 2160)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_fpees")
+centered = false
+flip_h = true
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+modulate = Color(1, 1, 1, 0.294118)
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(3840, 2160)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_fpees")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+modulate = Color(1, 1, 1, 0.0784314)
+motion_scale = Vector2(0.04, 0.04)
+motion_mirroring = Vector2(3840, 2160)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_fpees")
+centered = false
+flip_v = true
