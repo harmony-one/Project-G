@@ -75,6 +75,6 @@ func choose_next_target():
 func _on_minion_spawn_timeout() -> void:
 	for i in range(minion_spawn_count):
 		var minion: Node2D = minion_scene.instantiate()
-		minion.global_position = global_position + Vector2(randi_range(-200, 200), randi_range(-200, 200))
+		minion.global_position = global_position + Vector2(randi_range(-100, 100), randi_range(-100, 0))
 		get_parent().add_sibling(minion)
 		await get_tree().create_timer(minion_spawn_delay).timeout

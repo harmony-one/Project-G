@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scenes/Enemy/enemy_projectile_shooter.gd" id="4_ddss5"]
 [ext_resource type="PackedScene" uid="uid://75nxhnxaanx8" path="res://Scenes/Minion/minion_projectile.tscn" id="5_jvcln"]
 [ext_resource type="AudioStream" uid="uid://dgqygq2psqrf4" path="res://SFX/LaserPew.wav" id="6_ab710"]
-[ext_resource type="AudioStream" uid="uid://r601hvuhtm56" path="res://SFX/explosion.mp3" id="7_ub7ea"]
+[ext_resource type="AudioStream" uid="uid://r601hvuhtm56" path="res://SFX/Explosion.mp3" id="7_imhfi"]
 
 [sub_resource type="Curve" id="Curve_beteo"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -27,7 +27,7 @@ scale_max = 0.2
 scale_curve = SubResource("CurveTexture_25v7c")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b4kp6"]
-radius = 700.0
+radius = 950.0
 
 [node name="Minion" type="CharacterBody2D" groups=["minion"]]
 collision_layer = 4
@@ -84,7 +84,8 @@ max_polyphony = 2
 bus = &"SFX"
 
 [node name="ExplosionSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_ub7ea")
+stream = ExtResource("7_imhfi")
+volume_db = -10.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true

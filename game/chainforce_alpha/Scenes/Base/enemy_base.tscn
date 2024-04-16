@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://csnmk1ttegadm"]
+
+[ext_resource type="PackedScene" uid="uid://d2hkbk2gop8pt" path="res://Scenes/Base/base.tscn" id="1_x5g5c"]
+[ext_resource type="PackedScene" uid="uid://bsoolhrholh0c" path="res://Scenes/GUI/victory_screen.tscn" id="2_cdwil"]
+
+[node name="EnemyBase" groups=["enemy"] instance=ExtResource("1_x5g5c")]
+collision_layer = 4
+collision_mask = 2
+win_lose_screen = ExtResource("2_cdwil")
+
+[node name="Polygon2D" parent="." index="0"]
+color = Color(1.5, 0.2, 0, 1)
+
+[node name="ExplosionParticles" parent="." index="2"]
+self_modulate = Color(1.5, 0.2, 0, 1)

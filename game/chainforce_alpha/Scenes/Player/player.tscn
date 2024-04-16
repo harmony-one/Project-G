@@ -1,11 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://bk1dcyxlealda"]
+[gd_scene load_steps=21 format=3 uid="uid://bk1dcyxlealda"]
 
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_ff6vb"]
 [ext_resource type="Texture2D" uid="uid://cmujaxj14jlbb" path="res://Scenes/Player/ship_F.png" id="1_ynxfr"]
 [ext_resource type="Script" path="res://Scenes/Player/projectile_shooter.gd" id="3_33m55"]
 [ext_resource type="Texture2D" uid="uid://c3ucu6nuqrjco" path="res://Particles/circle.png" id="3_aovo6"]
 [ext_resource type="AudioStream" uid="uid://dgqygq2psqrf4" path="res://SFX/LaserPew.wav" id="5_xtn70"]
-[ext_resource type="AudioStream" uid="uid://r601hvuhtm56" path="res://SFX/explosion.mp3" id="6_r3ilb"]
+[ext_resource type="AudioStream" uid="uid://r601hvuhtm56" path="res://SFX/Explosion.mp3" id="6_r3ilb"]
+[ext_resource type="AudioStream" uid="uid://8xx326lc6q4q" path="res://SFX/MetalImpact.mp3" id="7_m0ptw"]
 
 [sub_resource type="Gradient" id="Gradient_xnug7"]
 colors = PackedColorArray(1, 0.490196, 0, 1, 1, 0.160784, 0, 1)
@@ -153,5 +154,10 @@ current = true
 [node name="ExplosionSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_r3ilb")
 bus = &"SFX"
+
+[node name="BumpSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_m0ptw")
+volume_db = -15.0
+pitch_scale = 1.1
 
 [connection signal="timeout" from="ProjectileShooter/Timer" to="ProjectileShooter" method="_on_timer_timeout"]

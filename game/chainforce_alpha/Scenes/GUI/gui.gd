@@ -6,6 +6,7 @@ extends CanvasLayer
 
 func _ready() -> void:
 	player_hp_bar.max_value = player.hp
+	player_hp_bar.value = player.hp
 	player.hp_changed.connect(_on_player_hp_changed)
 
 func _on_player_hp_changed(new_hp: float):

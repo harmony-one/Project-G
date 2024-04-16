@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scenes/Enemy/enemy_projectile_shooter.gd" id="4_e54jy"]
 [ext_resource type="AudioStream" uid="uid://dgqygq2psqrf4" path="res://SFX/LaserPew.wav" id="5_wqm3p"]
 [ext_resource type="PackedScene" uid="uid://crpppa3jd761u" path="res://Scenes/ShipProjectile/ship_projectile.tscn" id="5_xowxl"]
-[ext_resource type="AudioStream" uid="uid://r601hvuhtm56" path="res://SFX/explosion.mp3" id="6_e05s6"]
+[ext_resource type="AudioStream" uid="uid://r601hvuhtm56" path="res://SFX/Explosion.mp3" id="6_e05s6"]
 
 [sub_resource type="Curve" id="Curve_kbo11"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

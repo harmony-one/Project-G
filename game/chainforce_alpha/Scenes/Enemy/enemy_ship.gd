@@ -24,6 +24,14 @@ class_name EnemyShip
 var enemy_target: Node2D
 var is_dead: bool
 
+func _ready() -> void:
+	# Spawn animation
+	var start_scale: Vector2 = $Sprite2D.scale
+	
+	var tween: Tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($Sprite2D, "scale", start_scale, 1).from(Vector2(0.1, 0.1))
+
 func _physics_process(delta: float):
 	if is_dead:
 		return
@@ -82,23 +90,29 @@ func choose_next_target():
 				next_target = body
 	
 	if next_target == null:
-		target_closest_tower()
+		# If no target found, go to enemy base
+		for base: Base in get_tree().get_nodes_in_group("base"):
+			var target_enemy: bool = base.is_in_group("enemy") and is_in_group("friendly")
+			var target_friendly: bool = base.is_in_group("friendly") and is_in_group("enemy")
+			if target_enemy or target_friendly:
+				enemy_target = base
 		projectile_shooter.can_shoot = false
 	else:
 		enemy_target = next_target
 
-func target_closest_tower():
-	enemy_target = null
-	var towers_arr: Array[Node] = get_tree().get_nodes_in_group("tower")
-	if towers_arr.is_empty():
-		printerr("enemy_ship.gd: Why are there no towers?")
-		return
-	
-	for tower: Node2D in towers_arr:
-		if is_in_group("enemy") and tower.is_in_group("friendly"):
-			set_closest_target(tower)
-		elif is_in_group("friendly") and tower.is_in_group("enemy"):
-			set_closest_target(tower)
+# NOTE: Not used at the moment, might be useful later.
+#func target_closest_tower():
+	#enemy_target = null
+	#var towers_arr: Array[Node] = get_tree().get_nodes_in_group("tower")
+	#if towers_arr.is_empty():
+		#printerr("enemy_ship.gd: Why are there no towers?")
+		#return
+	#
+	#for tower: Node2D in towers_arr:
+		#if is_in_group("enemy") and tower.is_in_group("friendly"):
+			#set_closest_target(tower)
+		#elif is_in_group("friendly") and tower.is_in_group("enemy"):
+			#set_closest_target(tower)
 
 func set_closest_target(next_target: Node2D):
 	if enemy_target == null:
@@ -111,10 +125,10 @@ func set_closest_target(next_target: Node2D):
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	# Always focus the player instead of other entities
-	var deselect_current_target: bool = (enemy_target == null or enemy_target is Tower or body is Player)
+	var deselect_current_target: bool = (enemy_target == null or enemy_target is Base or enemy_target is Tower or body is Player)
 	var body_is_targetable: bool = body.is_in_group("friendly") or body.is_in_group("enemy")
 	if deselect_current_target and body_is_targetable:
-		if enemy_target != null and !(enemy_target is Player):
+		if enemy_target == null or !(enemy_target is Player):
 			enemy_target = body
 
 

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c3ucu6nuqrjco" path="res://Particles/circle.png" id="2_7pvn4"]
 [ext_resource type="AudioStream" uid="uid://dgqygq2psqrf4" path="res://SFX/LaserPew.wav" id="2_auid4"]
 [ext_resource type="PackedScene" uid="uid://bshgq3m3yqxs8" path="res://Scenes/Tower/tower_projectile.tscn" id="4_5msna"]
-[ext_resource type="AudioStream" uid="uid://r601hvuhtm56" path="res://SFX/explosion.mp3" id="7_fvt3w"]
+[ext_resource type="AudioStream" uid="uid://r601hvuhtm56" path="res://SFX/Explosion.mp3" id="7_fvt3w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ykmct"]
 radius = 145.014

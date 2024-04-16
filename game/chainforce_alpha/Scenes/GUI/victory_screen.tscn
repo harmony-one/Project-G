@@ -1,0 +1,286 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsoolhrholh0c"]
+
+[ext_resource type="Script" path="res://Scenes/GUI/end_screen.gd" id="1_45svt"]
+
+[sub_resource type="Animation" id="Animation_o6lu7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/ColorRect/Texts:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 110)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/ColorRect/Texts:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/ColorRect/TextsGhostEffect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/ColorRect/TextsGhostEffect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/ColorRect/TextsGhostEffect:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Control/ColorRect:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/ColorRect/Texts:size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 218)]
+}
+
+[sub_resource type="Animation" id="Animation_cccm2"]
+resource_name = "victory"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/ColorRect/Texts:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 110)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/ColorRect/Texts:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7),
+"transitions": PackedFloat32Array(2, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.55, 0.55), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/ColorRect/TextsGhostEffect:visible")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/ColorRect/TextsGhostEffect:modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7, 1.1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.0470588), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/ColorRect/TextsGhostEffect:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Control/ColorRect:modulate")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/ColorRect/Texts:size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 218)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_chu14"]
+_data = {
+"RESET": SubResource("Animation_o6lu7"),
+"victory": SubResource("Animation_cccm2")
+}
+
+[node name="VictoryScreen" type="CanvasLayer"]
+script = ExtResource("1_45svt")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+modulate = Color(1, 1, 1, 0.254902)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.9)
+
+[node name="Texts" type="VBoxContainer" parent="Control/ColorRect"]
+modulate = Color(0, 1, 0.207843, 1)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 110.0
+offset_right = 1152.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 109)
+
+[node name="VictoryText" type="RichTextLabel" parent="Control/ColorRect/Texts"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[center]VICTORY!"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/ColorRect/Texts"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[center]You've destroyed the enemy base!"
+fit_content = true
+
+[node name="TextsGhostEffect" type="VBoxContainer" parent="Control/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -213.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 109)
+
+[node name="VictoryText" type="RichTextLabel" parent="Control/ColorRect/TextsGhostEffect"]
+self_modulate = Color(0, 1, 0.207843, 1)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[center]VICTORY!"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/ColorRect/TextsGhostEffect"]
+self_modulate = Color(0, 1, 0.207843, 1)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[center]You've destroyed the enemy base!"
+fit_content = true
+
+[node name="MainMenuButton" type="Button" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -194.0
+offset_right = 160.0
+offset_bottom = -134.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Back to main menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_chu14")
+}
+autoplay = "victory"
+
+[connection signal="pressed" from="Control/ColorRect/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

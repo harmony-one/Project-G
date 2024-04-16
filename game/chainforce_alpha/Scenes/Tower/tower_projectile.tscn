@@ -40,3 +40,6 @@ scale = Vector2(1, 1)
 
 [node name="ExplosionParticles" parent="." index="3"]
 process_material = SubResource("ParticleProcessMaterial_bs8qr")
+
+[node name="LifetimeTimer" parent="." index="4"]
+wait_time = 1.5

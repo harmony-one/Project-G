@@ -27,6 +27,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="GUI" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_p5gj5")
 
 [node name="Control" type="Control" parent="."]
