@@ -49,6 +49,9 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 	
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().change_scene_to_file("res://Scenes/MainMenu/main_menu.tscn")
+	
 	handle_acceleration(delta)
 	handle_strafing(delta)
 	
