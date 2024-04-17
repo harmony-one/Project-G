@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://8undwloj2xsf"]
+[gd_scene load_steps=6 format=3 uid="uid://8undwloj2xsf"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/end_screen.gd" id="1_l4u6o"]
+[ext_resource type="Theme" uid="uid://c3q8tr4pwkvy1" path="res://Themes/default_theme.tres" id="2_1oh0f"]
 
 [sub_resource type="Animation" id="Animation_o6lu7"]
 length = 0.001
@@ -193,6 +194,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_1oh0f")
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 modulate = Color(1, 1, 1, 0.254902)

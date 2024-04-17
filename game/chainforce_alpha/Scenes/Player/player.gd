@@ -142,12 +142,12 @@ func collect_powerup(powerup_name: String):
 		tween.tween_property($PlayerShield, "self_modulate:a", 1, 0.5).from(0.0)
 		%ShieldPowerupTimer.start()
 	elif powerup_name == "power":
-		$ProjectileShooter.bonus_damage += 1
+		$ProjectileShooter.level += 1
 
 func disable_all_powerups():
 	_on_speed_powerup_timer_timeout()
 	_on_shield_powerup_timer_timeout()
-	$ProjectileShooter.bonus_damage = 0
+	$ProjectileShooter.level = 0
 
 func _on_speed_powerup_timer_timeout() -> void:
 	var tween: Tween = create_tween()

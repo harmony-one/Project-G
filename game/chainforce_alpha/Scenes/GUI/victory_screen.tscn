@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsoolhrholh0c"]
+[gd_scene load_steps=6 format=3 uid="uid://bsoolhrholh0c"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/end_screen.gd" id="1_45svt"]
+[ext_resource type="Theme" uid="uid://c3q8tr4pwkvy1" path="res://Themes/default_theme.tres" id="2_w27v5"]
 
 [sub_resource type="Animation" id="Animation_o6lu7"]
 length = 0.001
@@ -193,6 +194,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_w27v5")
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 modulate = Color(1, 1, 1, 0.254902)
@@ -213,7 +215,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_top = 110.0
 offset_right = 1152.0
-offset_bottom = 2762.0
+offset_bottom = 328.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(576, 109)

@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cv5i7mrscex6r"]
+[gd_scene load_steps=5 format=3 uid="uid://cv5i7mrscex6r"]
 
+[ext_resource type="Theme" uid="uid://c3q8tr4pwkvy1" path="res://Themes/default_theme.tres" id="1_0b3vs"]
 [ext_resource type="Script" path="res://Scenes/MainMenu/main_menu.gd" id="1_ouo18"]
 [ext_resource type="Script" path="res://Scenes/MainMenu/move_cam_constantly.gd" id="2_lbvoc"]
 [ext_resource type="PackedScene" uid="uid://djqk7tqcy47fr" path="res://Scenes/Background/parallax_background.tscn" id="2_qco3x"]
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_0b3vs")
 script = ExtResource("1_ouo18")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MainMenu"]
@@ -22,6 +24,12 @@ anchor_right = 1.0
 offset_top = 74.0
 offset_bottom = 173.0
 grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.3, 0.3, 0.3, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 72
 bbcode_enabled = true
 text = "[center]CHAIN FORCE"

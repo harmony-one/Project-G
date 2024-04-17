@@ -29,7 +29,8 @@ project/assembly_name="Chain Force"
 folder_colors={
 "res://Particles/": "purple",
 "res://SFX/": "yellow",
-"res://Scenes/": "green"
+"res://Scenes/": "green",
+"res://Themes/": "pink"
 }
 
 [input]
