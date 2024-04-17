@@ -67,6 +67,65 @@ text = "QUIT GAME"
 zoom = Vector2(0.3, 0.3)
 script = ExtResource("2_lbvoc")
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 215.0
+offset_right = 329.0
+offset_bottom = 568.0
+
+[node name="Label" type="Label" parent="MainMenu/VBoxContainer2"]
+layout_mode = 2
+text = "HOW TO PLAY
+
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MainMenu/VBoxContainer2"]
+layout_mode = 2
+text = "Destroy the enemy base
+ by pushing your way
+ through the enemy
+ minions and turrets
+
+Enemies drop shield, speed
+and damage powerups
+
+You lose all powerups when
+destroyed
+
+"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainMenu"]
+offset_left = 824.0
+offset_top = 208.0
+offset_right = 1115.0
+offset_bottom = 561.0
+
+[node name="Label" type="Label" parent="MainMenu/VBoxContainer3"]
+layout_mode = 2
+text = "CONTROLS
+
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MainMenu/VBoxContainer3"]
+layout_mode = 2
+text = "↑  / W = Move Forward
+↓  / S =  Move Backward
+←/ A = Move Left
+→ / D = Move Right
+
+Mouse 1 / Space Bar = Fire Primary
+Aim with the mouse pointer
+
+Escape = Quit Match
+
+"
+justification_flags = 227
+
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_qco3x")]
 
 [connection signal="pressed" from="MainMenu/VBoxContainer/StartButton" to="MainMenu" method="_on_start_button_pressed"]
