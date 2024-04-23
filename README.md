@@ -9,6 +9,8 @@
 4. Godot (source) https://github.com/harmony-one/godot
 * The Godot web3 SDK builds with Godot 3.5 for MacOSX/Linux and is not currently supported on Windows platforms. The SDK is being updated for compatbility with Godot 4.2
 
+5. Playable game demo https://github.com/harmony-one/Project-G/tree/main/game/chainforce_alpha 
+
 ## Early Gameplay Screenshots
 <br>
 <img src="./images/main.png" width="800" alt="Main Menu"/><br>
