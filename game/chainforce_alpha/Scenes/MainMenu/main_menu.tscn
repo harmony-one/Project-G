@@ -98,6 +98,7 @@ destroyed
 "
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 0
 offset_left = 824.0
 offset_top = 208.0
 offset_right = 1115.0

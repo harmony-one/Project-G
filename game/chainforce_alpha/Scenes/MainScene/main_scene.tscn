@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://rygldequiy7x"]
+[gd_scene load_steps=14 format=3 uid="uid://rygldequiy7x"]
 
 [ext_resource type="PackedScene" uid="uid://bk1dcyxlealda" path="res://Scenes/Player/player.tscn" id="1_sjerm"]
 [ext_resource type="PackedScene" uid="uid://b5md3lc67yau2" path="res://Scenes/GUI/gui.tscn" id="3_55fjw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b04so78u7jfp6" path="res://Scenes/Tower/friendly_tower.tscn" id="5_4dpdk"]
 [ext_resource type="PackedScene" uid="uid://cd3uxmj2xapgi" path="res://Scenes/Base/friendly_base.tscn" id="5_sa3yn"]
 [ext_resource type="PackedScene" uid="uid://djqk7tqcy47fr" path="res://Scenes/Background/parallax_background.tscn" id="7_cvltt"]
+[ext_resource type="AudioStream" uid="uid://clty08o5yrocv" path="res://leavelbeat.ogg" id="8_fco0p"]
 
 [sub_resource type="Environment" id="Environment_fpy8y"]
 background_mode = 3
@@ -786,3 +787,8 @@ position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("7_cvltt")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_fco0p")
+volume_db = -4.0
+autoplay = true
