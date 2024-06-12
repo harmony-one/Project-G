@@ -1,3 +1,4 @@
+2024 Apr 16 - Pre-release https://github.com/harmony-one/Project-G/releases/tag/1a
 2024 Mar 12 - work on chain force demo and testing godot blockchain interaction. tested an updated erc721 contract for minting in-game erc721 NFTs
 2024 Mar 11 - continued testing of latest update of web3 plugin. Now working fully on the Chain Force demo
 2024 Mar 9 - web3 plugin is now building and linking on godot 4.2. The extra JSON implementation was unnecessary and has been removed from ./thirdparty/ https://github.com/harmony-one/godot-web3-plugin/pull/2
@@ -11,3 +12,85 @@ I have also started porting a rudimentary game demo over to godot 3.5 in the mea
 
 2024 Feb 18 - Attempting to refactor and update the codebase to support the core changes on the newest stable version of Godot 
 https://github.com/adsorptionenthalpy/godot-web3-plugin/pull/1 
+
+
+===
+
+Phase 1: Complete **
+- Main menu
+- Explainer screen (low priority)
+
+- assets
+   - 2 to 4 different pieces of debris for the obstacles that make the lane
+   - animated starfield background
+   - player ships
+   - enemy ship
+   - friendly minions (various styles of ships, space invader'esque characters, etc)
+   - enemy minions (various styles of ships, space invader'esque characters, etc)
+   - laser sounds
+   - explosion sounds
+   - turrets
+   - neon colors
+
+
+- 1 Level
+    - 3 lanes
+    - enemy and player teams have defense turrets evenly spread throughout each lane
+    - minions spawn from defense turrets. Player side and enemy side
+    - enemy player and minions are trying to push through to your base
+        -  if minion or computer controlled enemy player encounters your player or minions, they stop             moving towards the base and attack
+
+- player
+
+    - HUD
+        - player details
+        - match details (score, % of turrets + buildings destroyed represented as a progress bar)
+        - minimap
+        
+    - player score is being tracked somewhere 
+    - basic stats
+    - respawn time (1 minute)
+    - basic starting gun. dual laser
+    - movement (speed controlled)
+        - A/D keys slides ship left/right (strafe like movement)
+        - W/S keys move forward, backward 
+        - space or button 1 (fire primary)
+    - add support for 2nd player, so I can look at networking
+- powerups
+    - randomly dropped from enemy minions
+        - firing rate powerup
+        - power increase (lasers get bigger, double in count every 2 powerups for wider spread)
+        - 30 second shield
+        - increase player speed
+        - lose all powerups on death
+
+    - (low priority) for achievements, track enemy players killed, minions killed, matches won, powerups collected: 100, 500, 2,000, 10,000, 100,000, 1,000,000 counts for copper, bronze, silver, gold, diamond,  platinum
+
+Phase 2 - Development current suspended by Harmony. Being adopted by 3rd party developers 
+
+- Mobile device support
+	- Minimap must move to support mobile control placement
+- More Powerups
+	- Increase powerup drop rate 4x
+	- Increase firing rate with damage powerup
+- Basic player stats on HUD
+- Player leveling system 
+	- Experience scale, experience collected from minions, players, towers, etc
+- secondary weapon
+- additional ship classes
+- a character selection for each ship class 
+- special weapon, class dependent
+	- energy chain weapon, two ships are linked with an energy "chain" (built with neon lime green, phosphorous terminal color 1's and 0's animation)
+- Ship animations
+- Alternate art style
+	- retro mode toggle in menu>>options>
+- Rules
+	- Every x minutes, the opponent 
+	- Friendly minions must drop powerups for opponents to collect
+	- in single player mode, enemy ai will collect powerup
+	- Match time limit. 60 minutes default
+- Game Credits screen
+- Multiplayer - 6 players can connect- 3v3
+	- Can p2p server list be decentralized on bc table?
+- High scores - this is necessary for constant monitoring of blockchain metrics
+- achievements, track enemy players killed, minions killed, matches won, powerups collected: 100, 500, 2,000, 10,000, 100,000, 1,000,000 counts for copper, bronze, silver, gold, diamond,  platinum
